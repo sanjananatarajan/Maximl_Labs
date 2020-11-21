@@ -1,0 +1,36 @@
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+from collections import defaultdict 
+MAX_CHARS = 256
+def findsubstring(stra): 
+      
+    n = len(stra) 
+      
+    # Count all distinct characters. 
+    dist_c = len(set([x for x in stra])) 
+      
+    curr_count = defaultdict(lambda: 0) 
+    count = 0
+    start = 0
+    min_len = n  
+    for j in range(n): 
+        curr_count[stra[j]] += 1
+        if curr_count[stra[j]] == 1: 
+            count += 1
+        if count == dist_c: 
+            while curr_count[stra[start]] > 1: 
+                if curr_count[stra[start]] > 1: 
+                    curr_count[stra[start]] -= 1
+                      
+                start += 1
+            len_window = j - start + 1
+            if min_len > len_window: 
+                min_len = len_window 
+                start_index = start
+    return str(stra[start_index: start_index +
+                                 min_len]) 
+if __name__=='__main__': 
+      
+        stra=input();
+        l=findsubstring(stra);
+        print(len(l));
